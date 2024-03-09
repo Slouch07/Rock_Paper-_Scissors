@@ -16,7 +16,7 @@
     if (playerSelection.toLowerCase() === computerSelection) {
       return "It's a tie!";
     } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "scissors") {
-      console.log("You win Rock beats Scissors");
+      console.log("You win! Rock beats Scissors");
       return true;
     } else if (playerSelection.toLowerCase() === "paper" && computerSelection === "rock") {
       console.log("You win! Paper beats Rock");
@@ -50,6 +50,7 @@
 
   // A function to retrieve the winner of the game after 5 rounds
   function getWinner() {
+    console.log("Game over!")
     if (playerScore > computerScore) {
       console.log(`You win! ${playerScore} - ${computerScore}`);
     } else if (playerScore < computerScore) {
@@ -60,16 +61,17 @@
   }
 
   // A function to play 5 rounds of the game to determine a winner
-  let roundCount = 0;
+  let roundCount = 1;
   let playerScore = 0;
   let computerScore = 0;
   function playGame() {
-    while (roundCount < 5) {
-    const playerSelection = prompt("What will you play? Rock, Paper, or Scissors: ");
-    const computerSelection = getComputerChoice();
-    let roundResult = playRound(playerSelection, computerSelection);
-    updateScore(roundResult);
-    roundCount++
+    while (roundCount <= 5) {
+      console.log(`Round ${roundCount}`)
+      const playerSelection = prompt("What will you play? Rock, Paper, or Scissors: ");
+      const computerSelection = getComputerChoice();
+      let roundResult = playRound(playerSelection, computerSelection);
+      updateScore(roundResult);
+      roundCount++;
     }
   }
 
