@@ -1,81 +1,91 @@
-<script>
-  // Function that selects a random move for the computer
-  function getComputerChoice() {
-    let randomNumber = Math.floor(Math.random() * 3);
-    switch(randomNumber) {
-      case 0:
-        return "rock";
-      case 1:
-        return "paper";
-      case 2:
-        return "scissors";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Function that selects a random move for the computer
+    function getComputerChoice() {
+      let randomNumber = Math.floor(Math.random() * 3);
+      switch(randomNumber) {
+        case 0:
+          return "rock";
+        case 1:
+          return "paper";
+        case 2:
+          return "scissors";
+      }
     }
-  }
-  // Function that plays one round of the game
-  function playRound(playerSelection, computerSelection) {
-    if (playerSelection.toLowerCase() === computerSelection) {
-      return "It's a tie!";
-    } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "scissors") {
-      console.log("You win! Rock beats Scissors");
-      return true;
-    } else if (playerSelection.toLowerCase() === "paper" && computerSelection === "rock") {
-      console.log("You win! Paper beats Rock");
-      return true;
-    } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "paper") {
-      console.log("You win! Scissors beats Rock");
-      return true;
-    } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "paper") {
-      console.log("You lose! Paper beats Rock");
-      return false;
-    } else if (playerSelection.toLowerCase() === "paper" && computerSelection === "scissors") {
-      console.log("You lose! Scissors beats Paper");
-      return false;
-    } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "rock") {
-      console.log("You lose! Rock beats Scissors");
-      return false;
+    // Function that plays one round of the game
+    function playRound(playerSelection, computerSelection) {
+      if (playerSelection.toLowerCase() === computerSelection) {
+        return "It's a tie!";
+      } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "scissors") {
+        console.log("You win! Rock beats Scissors");
+        return true;
+      } else if (playerSelection.toLowerCase() === "paper" && computerSelection === "rock") {
+        console.log("You win! Paper beats Rock");
+        return true;
+      } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "paper") {
+        console.log("You win! Scissors beats Rock");
+        return true;
+      } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "paper") {
+        console.log("You lose! Paper beats Rock");
+        return false;
+      } else if (playerSelection.toLowerCase() === "paper" && computerSelection === "scissors") {
+        console.log("You lose! Scissors beats Paper");
+        return false;
+      } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "rock") {
+        console.log("You lose! Rock beats Scissors");
+        return false;
+      }
     }
-  }
-
-  // A function to update the game total scores for player and computer
-  function updateScore(roundResult) {
-    if (roundResult === true) {
-      playerScore++;
-    } else if (roundResult === false) {
-      computerScore++;
-    } else {
-      console.log("It's a tie, score stays the same.")
-    }
-    console.log(`Player Score: ${playerScore} Computer Score: ${computerScore}`)
-  }
-
-  // A function to retrieve the winner of the game after 5 rounds
-  function getWinner() {
-    console.log("Game over!")
-    if (playerScore > computerScore) {
-      console.log(`You win! ${playerScore} - ${computerScore}`);
-    } else if (playerScore < computerScore) {
-      console.log(`Computer wins! ${computerScore} - ${playerScore}`);
-    } else {
-      console.log(`No winner, it's a tie!`);
-    }
-  }
-
-  // A function to play 5 rounds of the game to determine a winner
-  let roundCount = 1;
-  let playerScore = 0;
-  let computerScore = 0;
-  function playGame() {
-    while (roundCount <= 5) {
-      console.log(`Round ${roundCount}`)
-      const playerSelection = prompt("What will you play? Rock, Paper, or Scissors: ");
-      const computerSelection = getComputerChoice();
-      let roundResult = playRound(playerSelection, computerSelection);
-      updateScore(roundResult);
-      roundCount++;
-    }
-  }
-
-  playGame();
-  getWinner();
   
-</script>
+    // A function to update the game total scores for player and computer
+    function updateScore(roundResult) {
+      if (roundResult === true) {
+        playerScore++;
+      } else if (roundResult === false) {
+        computerScore++;
+      } else {
+        console.log("It's a tie, score stays the same.")
+      }
+      console.log(`Player Score: ${playerScore} Computer Score: ${computerScore}`)
+    }
+  
+    // A function to retrieve the winner of the game after 5 rounds
+    function getWinner() {
+      console.log("Game over!")
+      if (playerScore > computerScore) {
+        console.log(`You win! ${playerScore} - ${computerScore}`);
+      } else if (playerScore < computerScore) {
+        console.log(`Computer wins! ${computerScore} - ${playerScore}`);
+      } else {
+        console.log(`No winner, it's a tie!`);
+      }
+    }
+  
+    // A function to play 5 rounds of the game to determine a winner
+    let roundCount = 1;
+    let playerScore = 0;
+    let computerScore = 0;
+    function playGame() {
+      while (roundCount <= 5) {
+        console.log(`Round ${roundCount}`)
+        const playerSelection = prompt("What will you play? Rock, Paper, or Scissors: ");
+        const computerSelection = getComputerChoice();
+        let roundResult = playRound(playerSelection, computerSelection);
+        updateScore(roundResult);
+        roundCount++;
+      }
+    }
+  
+    playGame();
+    getWinner();
+    
+  </script>
+</body>
+</html>
