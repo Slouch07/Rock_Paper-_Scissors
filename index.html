@@ -12,20 +12,22 @@
   <button id="rock">Rock</button>
   <button id="paper">Paper</button>
   <button id="scissors">Scissors</button>
+  <button id="reset">Reset Game</button>
 
   <div id="score-board">
-    <div>Player Score: <span id="playScore"></span></div>
-    <div>Computer Score: <span id="compScore"></span> </div>
+    <div>Player Score: <span id="playScore">0</span></div>
+    <div>Computer Score: <span id="compScore">0</span> </div>
   </div>
    
   <div id="results"></div>
+  <div id="winner"></div>
 
   <script>
+    
     // Display scores
     let playerScore = 0;
     let computerScore = 0;
 
-    const scoreBoard = document.querySelector("#score-board");
     const playScore = document.querySelector("#playScore");
     const compScore = document.querySelector("#compScore");
     
@@ -44,44 +46,32 @@
 
     // Function that plays one round of the game
     function playRound(playerSelection, computerSelection) {
+      const results = document.querySelector("#results");
+      const outcome = document.createElement("div");
       if (playerSelection.toLowerCase() === computerSelection) {
-        const results = document.querySelector("#results");
-        const outcome = document.createElement("div");
         outcome.textContent = "It's a tie!"
         results.appendChild(outcome);
       } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "scissors") {
-        const results = document.querySelector("#results");
-        const outcome = document.createElement("div");
         outcome.textContent = "You win! Rock beats Scissors";
         results.appendChild(outcome);
         return true;
       } else if (playerSelection.toLowerCase() === "paper" && computerSelection === "rock") {
-        const results = document.querySelector("#results");
-        const outcome = document.createElement("div");
         outcome.textContent = "You win! Paper beats Rock";
         results.appendChild(outcome);
         return true;
       } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "paper") {
-        const results = document.querySelector("#results");
-        const outcome = document.createElement("div");
         outcome.textContent = "You win! Scissors beats Rock";
         results.appendChild(outcome);
         return true;
       } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "paper") {
-        const results = document.querySelector("#results");
-        const outcome = document.createElement("div");
         outcome.textContent = `You Lose! Computer chose ${computerSelection}`;
         results.appendChild(outcome);
         return false;
       } else if (playerSelection.toLowerCase() === "paper" && computerSelection === "scissors") {
-        const results = document.querySelector("#results");
-        const outcome = document.createElement("div");
         outcome.textContent = `You Lose! Computer chose ${computerSelection}`;
         results.appendChild(outcome);
         return false;
       } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "rock") {
-        const results = document.querySelector("#results");
-        const outcome = document.createElement("div");
         outcome.textContent = `You Lose! Computer chose ${computerSelection}`;
         results.appendChild(outcome);
         return false;
@@ -103,13 +93,14 @@
   
     // A function to retrieve the winner of the game after 5 rounds
     function getWinner() {
-      console.log("Game over!")
-      if (playerScore > computerScore) {
-        console.log(`You win! ${playerScore} - ${computerScore}`);
-      } else if (playerScore < computerScore) {
-        console.log(`Computer wins! ${computerScore} - ${playerScore}`);
-      } else {
-        console.log(`No winner, it's a tie!`);
+      if (playerScore === 5 || computerScore === 5) {
+        if (playerScore > computerScore) {
+          const winner = document.querySelector("#winner");
+          winner.innerText = "Game Over! You win!";
+        } else {
+          const winner = document.querySelector("#winner");
+          winner.innerText = "Game Over! Computer wins!";
+        }
       }
     }
 
@@ -118,38 +109,27 @@
     rock.addEventListener("click", () => {
       let roundResult = playRound("Rock", getComputerChoice());
       updateScore(roundResult);
+      getWinner();
     });
 
     const paper = document.querySelector("#paper");
     paper.addEventListener("click", () => {
       let roundResult = playRound("Paper", getComputerChoice());
       updateScore(roundResult);
+      getWinner();
     });
 
     const scissors = document.querySelector("#scissors");
     scissors.addEventListener("click", () => {
       let roundResult = playRound("Scissors", getComputerChoice());
       updateScore(roundResult);
-    });
-
+      getWinner();
+    });  
     
-    // A function to play 5 rounds of the game to determine a winner
-    // let roundCount = 1;
-    // let playerScore = 0;
-    // let computerScore = 0;
-    // function playGame() {
-    //   while (roundCount <= 5) {
-    //     console.log(`Round ${roundCount}`)
-    //     const playerSelection = prompt("What will you play? Rock, Paper, or Scissors: ");
-    //     const computerSelection = getComputerChoice();
-    //     let roundResult = playRound(playerSelection, computerSelection);
-    //     updateScore(roundResult);
-    //     roundCount++;
-    //   }
-    // }
-  
-    // playGame();
-    // getWinner();
+    const reset = document.querySelector("#reset");
+    reset.addEventListener("click", () => {
+      window.location.reload();
+    });    
     
   </script>
 </body>
